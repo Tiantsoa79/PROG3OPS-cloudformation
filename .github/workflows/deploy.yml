@@ -1,0 +1,27 @@
+name: Deploy Stack
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy stack
+        uses: aws-actions/aws-cloudformation-deploy@v4
+        with:
+          stack-name: STD21079
+          template-file: s3.yml
+          parameter-overrides: |
+            BucketName=my-bucket-name
+            SsmArnParameterName=/my/ssm/arn
+            SsmNameParameterName=/my/ssm/name
+          capabilities: CAPABILITY_IAM
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
