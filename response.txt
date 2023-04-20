@@ -1,0 +1,1 @@
+aws cloudformation create-stack --stack-name MyBucket --template-body file://./PROG3OPS/s3.yml --capabilities CAPABILITY_IAM
