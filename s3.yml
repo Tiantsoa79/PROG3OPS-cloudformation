@@ -1,0 +1,19 @@
+Resources:
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: STD21079
+  MyBucketArnParameter:
+    Type: 'AWS::SSM::Parameter'
+    Properties:
+      Name: /MyBucket/Arn
+      Description: The ARN of the MyBucket S3 bucket
+      Type: String
+      Value: !GetAtt MyBucket.Arn
+  MyBucketNameParameter:
+    Type: 'AWS::SSM::Parameter'
+    Properties:
+      Name: /MyBucket/Name
+      Description: The name of the MyBucket S3 bucket
+      Type: String
+      Value: STD21079
